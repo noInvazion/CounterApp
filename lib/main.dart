@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,6 +22,20 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void decrementCount() {
+    setState(() {
+      if (counter > 0) {
+        counter--;
+      }
+    });
+  }
+
+  void resetCount() {
+    setState(() {
+      counter = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,19 +45,30 @@ class _MyAppState extends State<MyApp> {
           title: Text("Counter App"),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text("You pushed the button this many times:"),
-            Text("$counter",
-            style: TextStyle(fontSize: 35),
+            Text(
+              "$counter",
+              style: TextStyle(fontSize: 35),
             ),
-            ElevatedButton(onPressed: incrementCount,
-            child: Text("Tap Tap") )
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              ElevatedButton(
+                  onPressed: incrementCount, child: Text("Increment")),
+              SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
+                  onPressed: decrementCount, child: Text("Decrease")),
+              SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(onPressed: resetCount, child: Text("Reset")),
+            ]),
           ]),
         ),
-        
       ),
     );
   }
 }
+
+// Style the button next
